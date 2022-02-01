@@ -1,0 +1,11 @@
+[rpc]
+port = 8080
+
+[debug]
+return_detailed_error = true
+
+[common]
+mode = "debug"
+
+[log]
+level = "debug"
