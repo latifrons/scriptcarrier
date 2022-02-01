@@ -37,5 +37,7 @@ func (rpc *RpcController) NewRouter() *gin.Engine {
 func (rpc *RpcController) addRouter(router *gin.Engine) *gin.Engine {
 	router.GET("/health", rpc.Health)
 
+	router.POST("/task", rpc.AddTask)
+
 	return router
 }

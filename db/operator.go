@@ -46,7 +46,9 @@ func (d *DbOperator) InitDefault() {
 	for _, dbo := range []struct {
 		Obj  interface{}
 		Name string
-	}{} {
+	}{
+		{Obj: &Task{}, Name: "Task"},
+	} {
 		err = d.Db.AutoMigrate(dbo.Obj)
 		utilfuncs.PanicIfError(err, "failed to migrate "+dbo.Name)
 	}

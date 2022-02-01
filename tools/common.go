@@ -16,7 +16,7 @@ type FolderConfig struct {
 	Private string
 }
 
-func ensureFolder(folder string, perm os.FileMode) {
+func EnsureFolder(folder string, perm os.FileMode) {
 	err := files.MkDirPermIfNotExists(folder, perm)
 	if err != nil {
 		logrus.WithError(err).WithField("path", folder).Fatal("failed to create folder")
@@ -41,11 +41,11 @@ func EnsureFolders() FolderConfig {
 		Config:  defaultPath(viper.GetString("dir.config"), viper.GetString("dir.root"), "config"),
 		Private: defaultPath(viper.GetString("dir.private"), viper.GetString("dir.root"), "private"),
 	}
-	ensureFolder(config.Root, 0755)
-	ensureFolder(config.Log, 0755)
-	ensureFolder(config.Data, 0755)
-	ensureFolder(config.Config, 0755)
-	ensureFolder(config.Private, 0700)
+	EnsureFolder(config.Root, 0755)
+	EnsureFolder(config.Log, 0755)
+	EnsureFolder(config.Data, 0755)
+	EnsureFolder(config.Config, 0755)
+	EnsureFolder(config.Private, 0700)
 	return config
 
 }

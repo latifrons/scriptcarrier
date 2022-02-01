@@ -1,6 +1,8 @@
 package core
 
 import (
+	"fmt"
+	"github.com/latifrons/scriptcarrier/db"
 	"github.com/latifrons/scriptcarrier/rpc"
 	"github.com/latifrons/scriptcarrier/tools"
 	"github.com/sirupsen/logrus"
@@ -24,6 +26,13 @@ func (n *Node) Setup() {
 		Port: viper.GetString("rpc.port"),
 	}
 	server.InitDefault()
+
+	dbOperator := &db.DbOperator{
+		Source: fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=true&loc=Local",
+			viper.GetString("mysql.username"), viper.GetString("mysql.password"),
+			viper.GetString("mysql.url"), viper.GetString("mysql.schema")),
+	}
+	dbOperator.InitDefault()
 
 	n.components = append(n.components, server)
 }
