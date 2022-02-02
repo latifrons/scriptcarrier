@@ -1,6 +1,9 @@
 package db
 
-import "gorm.io/gorm"
+import (
+	"database/sql"
+	"gorm.io/gorm"
+)
 
 type Task struct {
 	Name            string `gorm:"unique;size:128"`
@@ -8,5 +11,10 @@ type Task struct {
 	ScriptPath      string `gorm:"size:128"`
 	Args            string `gorm:"size:1024"`
 	IntervalSeconds int
+	NextRunTime     sql.NullTime `gorm:"index"`
+	LastRunTime     sql.NullTime `gorm:"index"`
+	LastRunCode     int
+	LastRunDuration int
+	LastRunLogPath  string
 	gorm.Model
 }
